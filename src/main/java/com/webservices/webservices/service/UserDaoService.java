@@ -13,6 +13,8 @@ public class UserDaoService {
 
     private static List<User> users = new ArrayList<>();
 
+    private static int userCount = 0;
+
     static {
 
         users.add(User.builder()
@@ -21,18 +23,21 @@ public class UserDaoService {
                 .birthDate(LocalDate.now().minusYears(1))
                 .build()
         );
+        ++userCount;
         users.add(User.builder()
                 .id(2)
                 .name("Eva")
                 .birthDate(LocalDate.now().minusYears(1))
                 .build()
         );
+        ++userCount;
         users.add(User.builder()
                 .id(3)
                 .name("Maria")
                 .birthDate(LocalDate.now().minusYears(1))
                 .build()
         );
+        ++userCount;
     }
 
     public List<User> findAll() {
@@ -43,4 +48,11 @@ public class UserDaoService {
         Predicate<? super User> predicate = user -> user.getId().equals(id);
         return users.stream().filter(predicate).findFirst().get();
     }
+
+    public User save(User user) {
+        user.setId(++userCount);
+        users.add(user);
+        return user;
+    }
+
 }
