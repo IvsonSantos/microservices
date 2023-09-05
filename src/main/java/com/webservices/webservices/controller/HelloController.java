@@ -21,4 +21,5 @@ public class HelloController {
     public HelloBean helloPath(@PathVariable String name) {
         return new HelloBean(String.format("Hello %s ", name));
     }
+
 }
